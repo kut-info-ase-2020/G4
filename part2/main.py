@@ -13,18 +13,19 @@ def main():
     yellow_led = LED(YELLOW_LED_PIN)
     red_led = LED(RED_LED_PIN)
 
-    result = read_dht11_dat()
-    if result:
-        humid, temp = result
+    while True:
+        result = read_dht11_dat()
+        if result:
+            humid, temp = result
 
-        discomf_idx = 0.81 * temp + 0.01 * humid * (0.99 * temp - 14.3) + 46.3
+            discomf_idx = 0.81 * temp + 0.01 * humid * (0.99 * temp - 14.3) + 46.3
 
-        if discomf_idx >= RED_THRESH:
-            red_led.blick()
-        elif discomf_idx >= YELLOW_THRESH:
-            yellow_led.blick()
-        else:
-            green_led.blick()
+            if discomf_idx >= RED_THRESH:
+                red_led.blick()
+            elif discomf_idx >= YELLOW_THRESH:
+                yellow_led.blick()
+            else:
+                green_led.blick()
 
 if __name__ == '__main__':
     main()
