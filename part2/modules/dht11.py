@@ -7,7 +7,7 @@
 ##########################################################################
 import RPi.GPIO as GPIO
 import time
-from .modules import get_logger
+from .logger import get_logger
 
 #DHT11 connect to BCM_GPIO14
 DHTPIN = 14
