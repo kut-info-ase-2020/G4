@@ -16,15 +16,26 @@ LEDPIN = 17
 
 class LED():
     def __init__(self, pin):
+        self.pin = pin
+        self.setup()
+
+    def blick(self):
+        GPIO.output(self.pin, GPIO.HIGH)
+
+    def off(self):
+        GPIO.output(self.pin, GPIO.LOW)
+
+    def setup(self):
         GPIO.setwarnings(False)
         #set the gpio modes to BCM numbering
         GPIO.setmode(GPIO.BCM)
         #set LEDPIN's mode to output,and initial level to LOW(0V)
-        GPIO.setup(pin, GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup(self.pin, GPIO.OUT, initial=GPIO.LOW)
 
-    def blick(self):
-        GPIO.output(LEDPIN, GPIO.HIGH)
-        GPIO.output(LEDPIN, GPIO.LOW)
+    def destroy(self):
+            GPIO.output(self.pin,GPIO.LOW)
+            #release resource
+            GPIO.cleanup()
 
 #print message at the begining ---custom function
 def print_message():

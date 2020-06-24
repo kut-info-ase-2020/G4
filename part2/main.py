@@ -1,4 +1,5 @@
-from modules import read_dht11_dat, LED
+from time import sleep
+from modules import read_dht11_dat, LED, destroy
 
 GREEN_LED_PIN = 17
 YELLOW_LED_PIN = 5
@@ -13,10 +14,12 @@ def main():
     yellow_led = LED(YELLOW_LED_PIN)
     red_led = LED(RED_LED_PIN)
 
-    while True:
-        result = read_dht11_dat()
-        if result:
-            humid, temp = result
+    try:
+        discomf_idx = 0
+        while True:
+            result = read_dht11_dat()
+            if result:
+                humid, temp = result
 
             discomf_idx = 0.81 * temp + 0.01 * humid * (0.99 * temp - 14.3) + 46.3
 
@@ -27,5 +30,14 @@ def main():
             else:
                 green_led.blick()
 
+            sleep(1)
+
+    except KeyboardInterrupt:
+        green_led.destroy()
+        yellow_led.destroy()
+        red_led.destroy()
+        destory()
+
 if __name__ == '__main__':
     main()
+
