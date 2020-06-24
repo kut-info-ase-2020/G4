@@ -7,6 +7,7 @@
 ##########################################################################
 import RPi.GPIO as GPIO
 import time
+from modules import get_logger
 
 #DHT11 connect to BCM_GPIO14
 DHTPIN = 14
@@ -20,6 +21,8 @@ STATE_INIT_PULL_UP = 2
 STATE_DATA_FIRST_PULL_DOWN = 3
 STATE_DATA_PULL_UP = 4
 STATE_DATA_PULL_DOWN = 5
+
+logger = get_logger(__name__)
 
 def read_dht11_dat():
     GPIO.setup(DHTPIN, GPIO.OUT)
@@ -79,7 +82,7 @@ def read_dht11_dat():
             else:
                 continue
     if len(lengths) != 40:
-        print "Data not good, skip"
+        logger.info("Data not good, skip")
         return False
 
     shortest_pull_up = min(lengths)
@@ -94,7 +97,7 @@ def read_dht11_dat():
         if length > halfway:
             bit = 1
         bits.append(bit)
-    print "bits: %s, length: %d" % (bits, len(bits))
+    logger.info("bits: %s, length: %d" % (bits, len(bits)))
     for i in range(0, len(bits)):
         byte = byte << 1
         if (bits[i]):
@@ -104,10 +107,10 @@ def read_dht11_dat():
         if ((i + 1) % 8 == 0):
             the_bytes.append(byte)
             byte = 0
-    print the_bytes
+    logger.info(the_bytes)
     checksum = (the_bytes[0] + the_bytes[1] + the_bytes[2] + the_bytes[3]) & 0xFF
     if the_bytes[4] != checksum:
-        print "Data not good, skip"
+        logger.info("Data not good, skip")
         return False
 
     return the_bytes[0], the_bytes[2]

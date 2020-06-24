@@ -31,12 +31,10 @@ def main():
                 red_led.blick()
                 green_led.off()
                 yellow_led.off()
-
             elif discomf_idx >= YELLOW_THRESH:
                 yellow_led.blick()
                 green_led.off()
                 red_led.off()
-
             else:
                 green_led.blick()
                 red_led.off()
