@@ -14,6 +14,8 @@ DHT_PIN = 14
 YELLOW_THRESH = 75
 RED_THRESH = 85
 
+MAX_UNCHANGE_COUNT = 100
+
 logger = get_logger(__name__)
 
 
@@ -21,7 +23,7 @@ def main():
     green_led = LED(GREEN_LED_PIN)
     yellow_led = LED(YELLOW_LED_PIN)
     red_led = LED(RED_LED_PIN)
-    dht11 = DHT11(DHT_PIN)
+    dht11 = DHT11(DHT_PIN, max_unchange=MAX_UNCHANGE_COUNT)
 
     try:
         discomf_idx = 0
