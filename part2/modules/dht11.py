@@ -1,6 +1,7 @@
-import RPi.GPIO as GPIO
 import time
-from .logger import get_logger
+import RPi.GPIO as GPIO
+
+from utils import get_logger
 
 
 logger = get_logger(__name__)

@@ -1,9 +1,9 @@
+from time import sleep
 import RPi.GPIO as GPIO
 
-from time import sleep
 from modules import LED
 from modules import DHT11
-from modules import get_logger
+from utils import get_logger
 from utils import compute_discomfort_index
 
 GREEN_LED_PIN = 17
