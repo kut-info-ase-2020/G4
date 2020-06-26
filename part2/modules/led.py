@@ -19,7 +19,7 @@ class LED():
         self.pin = pin
         self.setup()
 
-    def blick(self):
+    def on(self):
         GPIO.output(self.pin, GPIO.HIGH)
 
     def off(self):

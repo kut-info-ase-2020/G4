@@ -30,15 +30,15 @@ def main():
             logger.info('discomfort index: {}'.format(discomf_idx))
 
             if discomf_idx >= RED_THRESH:
-                red_led.blick()
+                red_led.on()
                 green_led.off()
                 yellow_led.off()
             elif discomf_idx >= YELLOW_THRESH:
-                yellow_led.blick()
+                yellow_led.on()
                 green_led.off()
                 red_led.off()
             else:
-                green_led.blick()
+                green_led.on()
                 red_led.off()
                 yellow_led.off()
 
