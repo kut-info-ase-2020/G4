@@ -28,7 +28,6 @@ logger = get_logger(__name__)
 class DHT11():
     def __init__(self, pin):
         self.pin = pin
-        #self.setup()
 
     def setup(self):
         GPIO.setup(self.pin, GPIO.OUT)
@@ -38,8 +37,11 @@ class DHT11():
         time.sleep(0.02)
         GPIO.setup(self.pin, GPIO.IN, GPIO.PUD_UP)
 
-    def read(self):
+    def preprocess(self):
         self.setup()
+
+    def read(self):
+        self.preprocess()
         unchanged_count = 0
         last = -1
         data = []
