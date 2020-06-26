@@ -1,3 +1,5 @@
+import RPi.GPIO as GPIO
+
 from time import sleep
 from modules import read_dht11_dat, LED, destroy, get_logger
 
@@ -43,10 +45,7 @@ def main():
             sleep(1)
 
     except KeyboardInterrupt:
-        green_led.destroy()
-        yellow_led.destroy()
-        red_led.destroy()
-        destory()
+        GPIO.cleanup()
 
 if __name__ == '__main__':
     main()
