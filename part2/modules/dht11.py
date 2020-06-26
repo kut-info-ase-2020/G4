@@ -1,16 +1,7 @@
-##########################################################################
-# Filename    : dht11.py
-# Description : test for SunFoudner DHT11 humiture & temperature module
-# Author      : Alan
-# Website     : www.osoyoo.com
-# Update      : 2017/07/06
-##########################################################################
 import RPi.GPIO as GPIO
 import time
 from .logger import get_logger
 
-#DHT11 connect to BCM_GPIO14
-DHTPIN = 14
 
 logger = get_logger(__name__)
 
