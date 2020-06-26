@@ -32,10 +32,6 @@ class LED():
         #set LEDPIN's mode to output,and initial level to LOW(0V)
         GPIO.setup(self.pin, GPIO.OUT, initial=GPIO.LOW)
 
-    def destroy(self):
-            GPIO.output(self.pin,GPIO.LOW)
-            #release resource
-            GPIO.cleanup()
 
 #print message at the begining ---custom function
 def print_message():
