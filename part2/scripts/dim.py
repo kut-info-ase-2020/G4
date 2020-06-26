@@ -1,12 +1,15 @@
 import RPi.GPIO as GPIO
 
 from time import sleep
-from modules import read_dht11_dat, LED, destroy, get_logger
+from modules import LED
+from modules import DHT11
+from modules import get_logger
 from utils import compute_discomfort_index
 
 GREEN_LED_PIN = 17
 YELLOW_LED_PIN = 5
 RED_LED_PIN = 26
+DHT_PIN = 14
 
 YELLOW_THRESH = 75
 RED_THRESH = 85
@@ -18,13 +21,14 @@ def main():
     green_led = LED(GREEN_LED_PIN)
     yellow_led = LED(YELLOW_LED_PIN)
     red_led = LED(RED_LED_PIN)
+    dht11 = DHT11(DHT_PIN)
 
     try:
         discomf_idx = 0
         while True:
-            result = read_dht11_dat()
+            result = dht11.read()
             if result:
-                humid, temp = result
+                humid, _, temp, _, _ = result
                 discomf_idx = compute_discomfort_index(temp, humid)
 
             logger.info('discomfort index: {}'.format(discomf_idx))
